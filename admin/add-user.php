@@ -1,6 +1,6 @@
 <?php include "header.php";
   
-  if(isset($_POST['save'])){
+  if(isset($_POST['save'])){ 
     include "config.php";
    $fname = mysqli_real_escape_string($conn, $_POST["fname"]);
    $lname = mysqli_real_escape_string($conn, $_POST["lname"]);
@@ -9,10 +9,10 @@
    $role = mysqli_real_escape_string($conn, $_POST["role"]);
 
   $sql = "SELECT username from user where username = '{$userName}'";
-    $validatinResult = mysqli_query($conn, $sql) or die("Query Faild");
+    $validatinResult = mysqli_query($conn, $sql) or die("Query Failed");
    
     if(mysqli_num_rows($validatinResult) > 0){
-      die("<p>User Name Already Exsting</p>");
+      die("<p>User Name Already Existing</p>");
 
     }else{
        $sendData = "INSERT INTO user(first_name, last_name, username, password, role) 
