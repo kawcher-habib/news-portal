@@ -1,9 +1,12 @@
-<?php 
-include "config.php";
-		$user_id = $_GET['id'];
-		$deleteData = "DELETE from user where user_id= '{$user_id}'";
-		if(mysqli_query($conn, $deleteData)){
-			header("Location: http://localhost/news-template/admin/users.php");
-		}
+<?php
+        include "config.php";
+        $getId = $_GET['id'];
+        $sql = "DELETE from user where user_id = '$getId'";
+        $result = mysqli_query($conn, $sql) or die("Query Failed". mysqli_connect_error());
+        if($result){
+            header("Location: {$hostName}/admin/users.php");
+        }else{
+            echo "Your Code not working";
+        }
 
 ?>

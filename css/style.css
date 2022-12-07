@@ -45,7 +45,7 @@ img.logo{
 }
 
 #header-admin{
-    background-color: #1E90FF;
+    background-color:#1482ed;
     padding: 15px 0;
 }
 
@@ -182,11 +182,11 @@ form{
 /* ===================== */
 
 /* Header Styling */
-#header{
+/* #header{
     background: #1e90ff;
     text-align: center;
     padding: 15px;
-}
+} */
 
 #logo{
     display: inline-block;
