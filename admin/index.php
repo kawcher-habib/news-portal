@@ -1,3 +1,12 @@
+<?php
+        include "config.php";
+
+        session_start();
+        if(isset($_SESSION['username'])){
+            header("Location: ${hostName}/admin/post.php");
+        }
+
+ ?>
 <!doctype html>
 <html>
    <head>
@@ -15,10 +24,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-offset-4 col-md-4">
-                        <img class="logo" src="images/news.jpg">
+                        <img class="logo" src="images/business news.png">
                         <h3 class="heading">Admin</h3>
                         <!-- Form Start -->
-                        <form  action="" method ="POST">
+                        <form  action="<?php echo $_SERVER['PHP_SELF'] ?>" method ="POST">
                             <div class="form-group">
                                 <label>Username</label>
                                 <input type="text" name="username" class="form-control" placeholder="" required>
@@ -30,6 +39,33 @@
                             <input type="submit" name="login" class="btn btn-primary" value="login" />
                         </form>
                         <!-- /Form  End -->
+
+                        <?php
+
+                            if(isset($_POST['login'])){
+                                include "config.php";
+                                $userName = mysqli_real_escape_string($conn, $_POST['username']);
+                                $password = mysqli_real_escape_string($conn, md5($_POST['password']));
+
+                             $sql = "SELECT username, password, role from user where username = '$userName' AND password = '$password' ";
+
+                                $result = mysqli_query($conn, $sql);
+
+                                if(mysqli_num_rows($result) > 0){
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        session_start();
+                                        $_SESSION['username'] = $row['username'];
+                                        $_SESSION['user_id'] = $row['user_id'];
+                                        $_SESSION['user_role'] = $row['role'];
+                                        header("Location: {$hostName}/admin/post.php");
+                                    }
+                                   
+                                }else{
+                                    echo "<p style= color: red; text-align: center;> Worng Password or UserName</p>";
+                                }
+                            }
+
+                         ?>
                     </div>
                 </div>
             </div>
