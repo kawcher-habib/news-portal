@@ -1,6 +1,8 @@
 <?php include "header.php";
 include "config.php";
-
+if ($_SESSION['user_role'] == '0') {
+        header("Location: ${hostName}/admin/post.php");
+    }
 if(isset($_POST['submit'])){
     
     $getId =  $_POST['user_id'];

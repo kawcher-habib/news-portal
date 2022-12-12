@@ -1,6 +1,11 @@
 <?php include "header.php";
+ include "config.php";
+ if ($_SESSION['user_role'] == '0') {
+        header("Location: ${hostName}/admin/post.php");
+    }
+    
 if (isset($_POST['save'])) {
-    include "config.php";
+   
     $fName = mysqli_real_escape_string($conn, $_POST['fname']);
     $lName = mysqli_real_escape_string($conn, $_POST['lname']);
     $userName = mysqli_real_escape_string($conn, $_POST['user']);
